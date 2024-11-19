@@ -1,4 +1,5 @@
 const express = require("express");
+const postsRouter = require("./routers/posts.js")
 const app = express();
 const port = 3000;
 const posts = [
@@ -11,6 +12,8 @@ const posts = [
 
 
 app.use(express.static('public'))
+app.use('/posts' , postsRouter)
+
 
 app.get("/bacheca", (req, res) => {
     const postCount = posts.length;
