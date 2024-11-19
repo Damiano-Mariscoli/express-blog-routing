@@ -2,9 +2,6 @@ const express = require("express");
 const router = express.Router();
 const postsList = require("../data/posts");
 
-
-
-
 //index
 router.get("/", (req, res) => {
   res.json(postsList);
@@ -12,7 +9,13 @@ router.get("/", (req, res) => {
 
 //show
 router.get("/:id", (req, res) => {
-  res.json(postsList[req.params.id]);
+  const id = req.params.id;
+  const post = postsList.find((post) => post.id == id);
+  if (post) {
+    res.json(post);
+  } else {
+    res.json({ error: "Post not found" });
+  }
 });
 
 //store
